@@ -35,26 +35,21 @@ RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
 
 # Install mpi4py
 RUN pip install \
-    mpi4py \
-    numpy \
-    pyyaml \
-    mkl \
-    mkl-include \
-    setuptools \
-    cmake \
-    cffi \
-    typing \
-    typing-extensions \
-    blobfile \
-    pillow
+    mpi4py==3.1.5 \
+    numpy==1.26.4 \
+    pyyaml==6.0.1 \
+    mkl==2024.0.0 \
+    mkl-include==2024.0.0 \
+    setuptools==69.2.0 \
+    cmake==3.28.4 \
+    cffi==1.16.0 \
+    typing==3.7.4.3 \
+    typing-extensions==4.10.0 \
+    blobfile==2.1.1 \
+    pillow==10.2.0 \
+    torchvision==0.14.1
 
 # Clone and install PyTorch
 RUN git clone --branch v${PYTORCH_VERSION} --recursive https://github.com/pytorch/pytorch  && \
     cd pytorch && \
     python setup.py install
-
-WORKDIR "/workspace"
-
-COPY . /workspace
-
-RUN pip install -e /workspace
